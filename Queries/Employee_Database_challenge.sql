@@ -52,4 +52,17 @@ ORDER BY e.emp_no;
 SELECT title, COUNT(emp_no) FROM mentorship_eligibility
 GROUP BY title;
 
-SELECT * FROM retiring_titles;
+SELECT * FROM retirement_titles;
+
+SELECT me.emp_no,
+	me.first_name,
+	me.last_name,
+	d.dept_name,
+	me.title
+INTO research_dept_mentors
+FROM mentorship_eligibility AS me
+JOIN dept_emp AS de
+ON (me.emp_no = de.emp_no)
+JOIN departments AS d
+ON (de.dept_no = d.dept_no)
+WHERE d.dept_name = 'Research';
